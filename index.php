@@ -1,2 +1,14 @@
-<?php
-    echo "hello world!";
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leaning PHP</title>
+</head>
+<body>
+    챕터1 연습문제 없음<br />
+    <a href="chapter2.php">챕터2 연습문제</a>
+</body>
+</html>
