@@ -8,7 +8,9 @@
     <title>Leaning PHP</title>
 </head>
 <body>
-    챕터1 연습문제 없음<br />
-    <a href="chapter2.php">챕터2 연습문제</a>
+챕터1 연습문제 없음<br/>
+<a href="chapter2.php">챕터2 연습문제</a>
+<a href="chapter3.php">챕터3 연습문제</a>
+<a href="chapter4.php">챕터3 연습문제</a>
 </body>
 </html>
