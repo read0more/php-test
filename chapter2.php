@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 /*
 * 문제1. 다음 PHP 프로그램의 오류를 찾아내시오.
 * print '점심 메뉴는 소고기 입니다.';
@@ -12,40 +14,45 @@ print '그는 '해물 요리면 좋을텐데'라고 생각했다.' -> 해물 요
 EOT;
 echo '<br/><br/>';
 
-/*
- * 문제2, 3
- *
- */
-echo '==== 문제2,3 ====<br/>';
-function centToDollar($cent)
-{
-    return $cent * 0.01;
-}
 
-$menuList = [['hamberger' => 4950], ['hamberger' => 4950], ['milk shake' => 1950], ['coke' => 85]];
-$taxRate = 7.5;
-$tipRate = 16;
-$total = [];
-foreach ($menuList as $menu) {
-    foreach ($menu as $food => $price) {
-        $tax = $price * ($taxRate / 100);
-        $tip = $price * ($tipRate / 100);
+echo '==== 문제2 ====<br/>';
+$hamburger = 4.95;
+$shake = 1.95;
+$cola = 0.85;
 
-        $total[$food]['name'] = $food;
-        $total[$food]['price'] = $total[$food]['price'] ? $total[$food]['price'] + $price : $price;
-        $total[$food]['count'] = $total[$food]['count'] ? $total[$food]['count'] + 1 : 1;
-        $total[$food]['total'] = $total[$food]['total'] ? $total[$food]['total'] * $total[$food]['count'] : $price + $tax + $tip;
-    }
-}
+$tip_rate = 0.16;
+$tax_rate = 0.075;
 
-echo "메뉴    가격  수량  총 가격<br/>";
-echo "==========================<br/>";
-foreach ($total as $line) {
-    $price = centToDollar($line['price']);
-    $total = centToDollar($line['total']);
-    echo "$line[name]   $price$    $line[count]    $total<br>";
-}
+$food = (2 * $hamburger) + $shake + $cola;
+$tip = $food * $tip_rate;
+$tax = $food * $tax_rate;
+
+$total = $food + $tip + $tax;
+
+echo "총 가격: \$$total";
 echo '<br/><br/>';
+
+echo '==== 문제3 ====<br/>';
+$hamburger = 4.95;
+$shake = 1.95;
+$cola = 0.85;
+
+$tip_rate = 0.16;
+$tax_rate = 0.075;
+
+$food = (2 * $hamburger) + $shake + $cola;
+$tip + $food * $tip_rate;
+$tax = $food * $tax_rate;
+
+$total = $food + $tip + $tax;
+
+printf("%s \%.2f %d개: \%5.2f<br/>", '햄버거', $hamburger, 2, 2 * $hamburger);
+printf("%s \%.2f %d개: \%5.2f<br/>", '쉐이크', $shake, 1, $shake);
+printf("%s \%.2f %d개: \%5.2f<br/>", '콜라', $cola, 1, $cola);
+printf("%s \%.2f<br/>", '음식 가격 합계', $food);
+printf("%s \%.2f<br/>", '음식 가격, 부가세 합계', $food + $tax);
+printf("%s \%.2f<br/>", '음식 가격, 부가세, 팁 합계', $total);
+
 
 // 문제4. 이름 출력
 echo '==== 문제4 ====<br/>';
@@ -59,9 +66,8 @@ echo '<br/><br/>';
 echo '==== 문제5 ====<br/>';
 for ($i = 1; $i <= 5; $i++) {
     echo "$i<br/>";
-
 }
-echo '<br>';
+echo '<br/>';
 $pow = 1;
 for ($i = 1; $i <= 5; $i++) {
     $pow *= 2;
