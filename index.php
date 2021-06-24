@@ -14,5 +14,6 @@
 <a href="chapter4.php">챕터4 연습문제</a>
 <a href="chapter5.php">챕터5 연습문제</a>
 <a href="chapter6.php">챕터6 연습문제</a>
+<a href="chapter7.php">챕터7 연습문제</a>
 </body>
 </html>
