@@ -1,3 +1,21 @@
+<?php
+
+//    $db->exec(
+//        "
+//        CREATE TABLE dishes(
+//            dish_id INT PRIMARY KEY AUTO_INCREMENT,
+//            dish_name VARCHAR(255),
+//            price DECIMAL(4,2),
+//            is_spicy INT
+//        )
+//        "
+//    );
+//    $db->exec(
+//            "INSERT INTO dishes(dish_name, price, is_spicy) VALUES ('dish2', 50.4, 0)"
+//    );
+
+?>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -15,5 +33,6 @@
 <a href="chapter5.php">챕터5 연습문제</a>
 <a href="chapter6.php">챕터6 연습문제</a>
 <a href="chapter7.php">챕터7 연습문제</a>
+<a href="chapter8.php">챕터8 연습문제</a>
 </body>
 </html>
