@@ -22,7 +22,8 @@ while ($row = $stmt->fetch()) {
  */
 if (($_POST['question'] ?? '') === 'q2') {
     $price = $_POST['price'];
-    $stmt = $db->query("SELECT * FROM dishes WHERE $price <= price ORDER BY price");
+    $stmt = $db->prepare("SELECT * FROM dishes WHERE ? <= price ORDER BY price");
+    $stmt->execute([$price]);
     printDishTable($stmt);
 }
 
@@ -61,9 +62,11 @@ function printDishTable($dishStmt)
  */
 if (($_POST['question'] ?? '') === 'q3') {
     $dishName = $_POST['dish_name'];
-    $stmt = $db->query("SELECT * FROM dishes WHERE dish_name = '$dishName' ORDER BY price");
+    $stmt = $db->prepare("SELECT * FROM dishes WHERE dish_name = ? ORDER BY price");
+    $stmt->execute([$dishName]);
     printDishTable($stmt);
 }
+
 function printSelectMenuFormFromDB()
 {
     $db = $GLOBALS['db'];
