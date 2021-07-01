@@ -1,0 +1,6 @@
+abc@naver.com,3
+abc@gmail.com,2
+abc@empas.com,2
+abc2@gmail.com,1
+abc3@gmail.com,1
+abc4@gmail.com,1

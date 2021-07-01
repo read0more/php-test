@@ -1,3 +1,7 @@
+<?php
+    
+?>
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -16,5 +20,6 @@
 <a href="chapter6.php">챕터6 연습문제</a>
 <a href="chapter7.php">챕터7 연습문제</a>
 <a href="chapter8.php">챕터8 연습문제</a>
+<a href="chapter9.php">챕터9 연습문제</a>
 </body>
 </html>

@@ -1,0 +1,4 @@
+abc1@exmple.com|으아악1
+def2@exmple.com|박2
+qwe3@exmple.com|ㅇㅇㅇ3
+ert4@exmple.com|???4
