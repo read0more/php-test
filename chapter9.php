@@ -7,12 +7,30 @@ error_reporting(E_ALL);
  * 문제 1. html 템플릿 파일읽고 출력값으로 교체하고 별도의 파일로 페이지 저장하기
  */
 $page = file_get_contents('test-template.html');
-$page = strtr($page, [
-    '{title}' => '9연습문제',
-    '{color}' => 'cyan',
-]);
+if ($page === false) {
+    die('test-template.html 파일을 읽을 수 없습니다.');
+}
 
-file_put_contents('result.html', $page);
+$vars = [
+  'title' => '9연습문제',
+  'color' => 'gold'
+];
+$templateVars = [];
+foreach ($vars as $k => $v) {
+    $templateVars['{' . $k. '}'] = $v;
+}
+
+$page = str_replace(array_keys($templateVars), array_values($templateVars), $page);
+
+//$page = strtr($page, [
+//    '{title}' => '9연습문제',
+//    '{color}' => 'cyan',
+//]);
+
+$result = file_put_contents('result.html', $page);
+if ($result === false) {
+    die('result.html 파일을 생성할 수 없습니다.');
+}
 
 /**
  * 문제 2. addresses.txt 한줄 씩 읽어서
@@ -29,7 +47,10 @@ arsort($countArr);
 foreach ($countArr as $email => $count) {
     $result .= "$email,$count\n";
 }
-file_put_contents('addresses-count.txt', $result);
+$result = file_put_contents('addresses-count.txt', $result);
+if ($result === false) {
+    die('result.html 파일을 생성할 수 없습니다.');
+}
 
 /**
  * 문제 3. CSV파일을 HTML 테이블로 출력
@@ -45,14 +66,8 @@ echo <<<table
 table;
 
 while ((!feof($fh)) && ($info = fgetcsv($fh))) {
-    $isSpicy = $info[2] ? 'O' : "X";
-    echo <<<tr
-            <tr>
-                <td>$info[0]</td>
-                <td>$info[1]</td>
-                <td>$isSpicy</td>
-            </tr>
-        tr;
+    $info[2] = $info[2] ? 'O' : "X";
+    echo "<tr><td>" . implode("</td><td>", $info) . "</td></tr>";
 }
 
 echo "</table>";
@@ -68,7 +83,7 @@ if (isset($_POST['filename'])) {
 
 function printFile($filename)
 {
-    $basePath = $_SERVER['DOCUMENT_ROOT'];
+    $basePath = realpath($_SERVER['DOCUMENT_ROOT']);
     $filepath = realpath("$basePath/$filename");
 
     // 문제 5. HTML 파일만 가능하게 하기
@@ -77,11 +92,8 @@ function printFile($filename)
         return;
     }
 
-    if (file_exists($filepath) && $filename === substr($filename, 0, strlen($basePath))) {
-        foreach (file($filepath) as $line) {
-            echo htmlentities($line);
-            echo "<br />";
-        }
+    if ($basePath === substr($filepath, 0, strlen($basePath)) && is_readable($filepath)) {
+        echo nl2br(htmlentities(file_get_contents($filepath)));
     } else {
         echo '올바른 경로를 입력해주세요.';
     }
