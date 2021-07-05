@@ -8,21 +8,23 @@ session_start();
  * 문제 1. 쿠키로 사용자가 페이지 몇 번봤는지 지속해서 기록하고 출력
  * 문제 2. 5, 10, 15번째 방문 시 별도의 특별한 메시지 출력. 20회에는 쿠키 삭제하고 열람 횟수 초기화
  */
-$visitCount = $_COOKIE['visit_count'] ?? 0;
-$visitCount += 1;
-
+$visitCount = 1 + ($_COOKIE['visit_count'] ?? 0);
 if ($visitCount === 20) {
     setcookie('visit_count', '');
-    echo "20회 열람 시에는 열람 횟수가 초기화";
+    $msg = "20회 열람 시에는 열람 횟수가 초기화";
 } else {
     setcookie('visit_count', $visitCount);
+    $msg = "열람횟수 : $visitCount<br />";
+    if ($visitCount === 5) {
+        $msg .= '5회 째';
+    } else if ($visitCount === 10) {
+        $msg .= '10회 째';
+    } else if ($visitCount === 15) {
+        $msg .= '15회 째';
+    }
 }
 
-if ($visitCount % 5 === 0) {
-    echo "열람 횟수가 5의 배수 입니다.";
-}
-
-echo "열람 횟수: $visitCount";
+echo $msg;
 
 /**
  * 문제 3. 색상 목록을 출력하는 폼을 작성하고, 별도의 페이지를 만들어 사용자가 배경색을 선택한게 나오게
@@ -65,8 +67,8 @@ function printFormQ4() {
     ];
     echo "<form method='post' action='chapter10-3.php'>";
     foreach ($products as $i => $product) {
-        $defaultQty = $_SESSION[$product] ?? 0;
-        echo "$product 수량 : <input type='text' name='product-$i-qty' value='$defaultQty'/><br />";
+        $defaultQty = $_SESSION['products'][$product]['qty'] ?? 0;
+        echo "$product 수량 : <input type='text' name='$product-qty' value='$defaultQty' /><br />";
     }
     echo "<button type='submit'>제출</button>";
     echo "</form>";

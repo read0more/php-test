@@ -13,13 +13,29 @@ session_start();
 <body>
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $_SESSION = $_POST;
-        foreach ($_POST as $product => $qty) {
+        if ($_POST['is_complete']) {
+            unset($_SESSION['products']);
+            echo "주문이 완료되었습니다.";
+            return;
+        }
 
+        echo "<b>주문내역</b><br />";
+        foreach ($_POST as $product => $qty) {
+            if (preg_match('/-qty$/', $product, $output_array)) {
+                echo "$product 수량 : $qty<br />";
+                $productName = explode('-', $product)[0];
+                $_SESSION['products'][$productName]['name'] = $productName;
+                $_SESSION['products'][$productName]['qty'] = $qty;
+            }
         }
     } else {
         echo "정상적인 접근이 아닙니다.";
     }
 ?>
+<form method="post">
+    <input type="hidden" name="is_complete" value="true"/>
+    <button type="submit">제출</button>
+</form>
+<a href="javascript:history.go(-1)">뒤로가기</a>
 </body>
 </html>
