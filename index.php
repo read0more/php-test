@@ -1,5 +1,5 @@
 <?php
-    setcookie('userid', 'yk', time() + 3600);
+
 ?>
 
 <!doctype html>
