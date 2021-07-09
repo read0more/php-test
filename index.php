@@ -1,5 +1,5 @@
 <?php
-
+$a = 1;
 ?>
 
 <!doctype html>
@@ -23,5 +23,8 @@
 <a href="chapter8.php">챕터8 연습문제</a>
 <a href="chapter9.php">챕터9 연습문제</a>
 <a href="chapter10.php">챕터10 연습문제</a>
+<a href="chapter11.php">챕터11 연습문제</a>
+<br />챕터12는 문법적으로 틀린거 찾는거 위주라 패스<br />
+<a href="chapter13.php">챕터13 연습문제</a>
 </body>
 </html>
